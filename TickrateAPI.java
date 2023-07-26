@@ -1,9 +1,9 @@
-package com.totis.infinityg.extras.totis_tickrate_changer;
+package com.totis.mymodid.extras.totis_tickrate_changer;
 
-import com.totis.infinityg.Constants;
-import com.totis.infinityg.Main;
-import com.totis.infinityg.server.network.ModMessages;
-import com.totis.infinityg.extras.totis_tickrate_changer.network.TickrateMessage;
+import com.totis.mymodid.Constants;
+import com.totis.mymodid.Main;
+import com.totis.mymodid.server.network.ModMessages;
+import com.totis.mymodid.extras.totis_tickrate_changer.network.TickrateMessage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -131,18 +131,6 @@ public class TickrateAPI {
     }
 
     /**
-     * Let you change the map tickrate
-     * Can only be called from server-side. Can also be called from client-side if is singleplayer.
-     * This will not update the tickrate from the server/clients
-     * @param ticksPerSecond Tickrate to be set
-     */
-    /*public static void changeMapTickrate(float ticksPerSecond) {
-        MinecraftServer server = Minecraft.getInstance().getSingleplayerServer();
-        Level world = server.getEntityWorld();
-        //world.getGameRules().register(Constants.GAME_RULE, ticksPerSecond + "");
-    }*/
-
-    /**
      * Only returns the real tickrate if you call the method server-side or in singleplayer
      * @return The server tickrate or the client server tickrate if it doesn't have access to the real tickrate.
      */
@@ -157,73 +145,4 @@ public class TickrateAPI {
     public static float getClientTickrate() {
         return Constants.TICKS_PER_SECOND;
     }
-
-    /**
-     * Can only be called in the server-side or singleplayer
-     * @return The map tickrate or the server tickrate if it doesn't have a map tickrate.
-     */
-    /*public static float getMapTickrate() {
-        GameRules rules = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getGameRules();
-        if(rules.hasRule(Constants.GAME_RULE)) {
-            return Float.parseFloat(rules.getString(Constants.GAME_RULE));
-        }
-        return getServerTickrate();
-    }*/
-
-    /**
-     * Checks if the tickrate is valid
-     * @param ticksPerSecond Tickrate to be checked
-     * @deprecated Used to check if the tickrate > 0, but I decided to let any tickrate be valid according to the config limits
-     */
-    @Deprecated
-    public static boolean isValidTickrate(float ticksPerSecond) {
-        return true;
-    }
-
-    /**
-     * Processes IMC messages
-     * Send an IMC message using FMLInterModComms.sendMessage
-     * @hide
-     */
-    /*public static void processIMC(InterModComms.IMCMessage msg) {
-        String type, player = null;
-        float tickrate;
-        boolean save = false;
-
-        if(msg.equals()) {
-
-            NBTTagCompound nbt = msg.getNBTValue();
-
-            type = nbt.hasKey("type") ? nbt.getString("type") : "all";
-            tickrate = nbt.hasKey("tickrate") ? nbt.getFloat("tickrate") : Constants.DEFAULT_TICKRATE;
-            player = nbt.hasKey("player") ? nbt.getString("player") : null;
-            save = nbt.hasKey("save") && nbt.getBoolean("save");
-
-        } else if(msg.s()) {
-
-            type = "all";
-            tickrate = Float.parseFloat(msg.getStringValue());
-
-        } else {
-            return;
-        }
-
-        if(type.equalsIgnoreCase("client")) {
-            MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
-            if(player != null && server != null && server.getPlayerList() != null) {
-                EntityPlayer pl = server.getPlayerList().getPlayerByUsername(player);
-                changeClientTickrate(pl, tickrate, false);
-            } else {
-                changeClientTickrate(tickrate, false);
-            }
-        } else if(type.equalsIgnoreCase("server")) {
-            changeServerTickrate(tickrate, false);
-        } else if(type.equalsIgnoreCase("map")) {
-            changeMapTickrate(tickrate);
-        } else if(type.equalsIgnoreCase("default")) {
-            changeDefaultTickrate(tickrate, save);
-        } else {
-            changeTickrate(tickrate, false);
-        }
-    }*/
 }
