@@ -1,4 +1,4 @@
-package com.totis.infinityg;
+package com.totis.mymodid;
 
 @SuppressWarnings("all")
 public class Constants {
