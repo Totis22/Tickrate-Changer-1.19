@@ -1,18 +1,9 @@
 package com.totis.mymodid;
 
 import com.mojang.logging.LogUtils;
-import com.totis.mymodid.client.render.entity.BlackholeRenderer;
-import com.totis.mymodid.client.render.entity.BlastRenderer;
-import com.totis.mymodid.client.render.entity.PortalRenderer;
-import com.totis.mymodid.client.render.entity.TornadoRenderer;
-import com.totis.mymodid.server.entity.ModEntityTypes;
 import com.totis.mymodid.server.item.ModItems;
 import com.totis.mymodid.server.network.ModMessages;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -20,7 +11,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.WorldEvent;
