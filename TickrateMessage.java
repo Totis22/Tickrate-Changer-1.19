@@ -1,7 +1,7 @@
-package com.totis.infinityg.extras.totis_tickrate_changer.network;
+package com.totis.mymodid;
 
-import com.totis.infinityg.Main;
-import com.totis.infinityg.extras.totis_tickrate_changer.TickrateAPI;
+import com.totis.mymodid.Main;
+import com.totis.mymodid.extras.totis_tickrate_changer.TickrateAPI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -47,15 +47,6 @@ public class TickrateMessage {
             // Server Player
             ServerPlayer serverPlayer = context.getSender();
             float tickrate = this.tickrate;
-            /*if(tickrate < Constants.MIN_TICKRATE) {
-                Main.LOGGER.info("Tickrate forced to change from " + tickrate + " to " +
-                        Constants.MIN_TICKRATE + ", because the value is too low");
-                tickrate = Constants.MIN_TICKRATE;
-            } else if(tickrate > Constants.MAX_TICKRATE) {
-                Main.LOGGER.info("Tickrate forced to change from " + tickrate + " to " +
-                        Constants.MAX_TICKRATE + ", because the value is too high");
-                tickrate = Constants.MAX_TICKRATE;
-            }*/
 
             if(context.getDirection() == NetworkDirection.PLAY_TO_CLIENT) {
                 Main.INSTANCE.updateClientTickrate(tickrate, true);
