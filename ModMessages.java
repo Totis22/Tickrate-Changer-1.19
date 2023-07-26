@@ -1,4 +1,4 @@
-package com.totis.mymodid.server.network;
+package com.totis.mymodid;
 
 import com.totis.mymodid.Constants;
 import com.totis.mymodid.extras.totis_tickrate_changer.network.TickrateMessage;
