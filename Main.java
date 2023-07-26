@@ -1,13 +1,13 @@
-package com.totis.infinityg;
+package com.totis.mymodid;
 
 import com.mojang.logging.LogUtils;
-import com.totis.infinityg.client.render.entity.BlackholeRenderer;
-import com.totis.infinityg.client.render.entity.BlastRenderer;
-import com.totis.infinityg.client.render.entity.PortalRenderer;
-import com.totis.infinityg.client.render.entity.TornadoRenderer;
-import com.totis.infinityg.server.entity.ModEntityTypes;
-import com.totis.infinityg.server.item.ModItems;
-import com.totis.infinityg.server.network.ModMessages;
+import com.totis.mymodid.client.render.entity.BlackholeRenderer;
+import com.totis.mymodid.client.render.entity.BlastRenderer;
+import com.totis.mymodid.client.render.entity.PortalRenderer;
+import com.totis.mymodid.client.render.entity.TornadoRenderer;
+import com.totis.mymodid.server.entity.ModEntityTypes;
+import com.totis.mymodid.server.item.ModItems;
+import com.totis.mymodid.server.network.ModMessages;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("all")
 @Mod(Constants.MOD_ID)
 public class Main {
-    // Directly reference a slf4j logger
+
     public static final Logger LOGGER = LogUtils.getLogger();
     public static Main INSTANCE;
 
@@ -47,43 +47,25 @@ public class Main {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
-        bus.addListener(this::blockEntitySpecialRenderer);
         bus.addListener(this::setup);
         bus.addListener(this::enqueueIMC);
         bus.addListener(this::processIMC);
         bus.addListener(this::clientSetup);
 
         ModItems.register(bus);
-        ModEntityTypes.register(bus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void blockEntitySpecialRenderer(final EntityRenderersEvent.RegisterRenderers event) {
-        // Sync block entity with a custom renderer
-        //event.registerBlockEntityRenderer(ModBlockEntities.VENDINGMACHINE_BLOCKENTITY.get(), VendingMachineRender::new);
-    }
-    private void clientSetup(final FMLClientSetupEvent event) {
-        EntityRenderers.register(ModEntityTypes.PORTAL.get(), PortalRenderer::new);
-        EntityRenderers.register(ModEntityTypes.BLAST.get(), BlastRenderer::new);
-        EntityRenderers.register(ModEntityTypes.TORNADO.get(), TornadoRenderer::new);
-        EntityRenderers.register(ModEntityTypes.BLACKHOLE.get(), BlackholeRenderer::new);
-        // 3D Blocks (render correctly)
-        //ItemBlockRenderTypes.setRenderLayer(ModBlocks.ATM.get(), RenderType.cutout());
-
-        // Sync the block entity's menu with its screen
-        //MenuScreens.register(ModMenuTypes.ATM_MENU.get(), ATMScreen::new);
-    }
+    private void clientSetup(final FMLClientSetupEvent event) { }
 
     private void setup(final FMLCommonSetupEvent event) {
         ModMessages.register();
     }
 
-    private void enqueueIMC(final InterModEnqueueEvent event) {
-    }
+    private void enqueueIMC(final InterModEnqueueEvent event) { }
 
-    private void processIMC(final InterModProcessEvent event) {
-    }
+    private void processIMC(final InterModProcessEvent event) { }
 
     @OnlyIn(Dist.CLIENT)
     public void updateClientTickrate(float tickrate, boolean log) {
@@ -95,6 +77,11 @@ public class Main {
         Minecraft mc = Minecraft.getInstance();
         if(mc == null) return; // Wut
 
+        //Timer is a private field, so i added it to accesstransformer.cfg
+        /*
+        public net.minecraft.client.Minecraft f_90991_ # timer
+        public-f net.minecraft.client.Timer * # All fields
+        */
         mc.timer.msPerTick = 1000F / tickrate;
     }
 
