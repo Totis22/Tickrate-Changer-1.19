@@ -1,7 +1,7 @@
-package com.totis.infinityg.server.item;
+package com.totis.mymodid.server.item;
 
-import com.totis.infinityg.extras.totis_tickrate_changer.TickrateAPI;
-import com.totis.infinityg.utils.TotisMathUtils;
+import com.totis.mymodid.extras.totis_tickrate_changer.TickrateAPI;
+import com.totis.mymodid.utils.TotisMathUtils;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
